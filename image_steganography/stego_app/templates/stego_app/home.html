@@ -1,0 +1,63 @@
+{% extends 'stego_app/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h2>Image Steganography Tool</h2>
+            </div>
+            <div class="card-body">
+                <h4>Welcome to the Image Steganography Tool</h4>
+                <p>
+                    Steganography is the practice of concealing a message within another message or a physical object.
+                    In this case, we hide text messages within images by slightly modifying pixel values.
+                </p>
+                <p>
+                    This tool allows you to:
+                </p>
+                <ul>
+                    <li>Hide secret messages within image files</li>
+                    <li>Extract hidden messages from steganographic images</li>
+                </ul>
+                
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Encode a Message</h5>
+                                <p class="card-text">Hide your secret message inside an image.</p>
+                                <a href="{% url 'stego_app:encode' %}" class="btn btn-primary">Encode Message</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Decode a Message</h5>
+                                <p class="card-text">Extract a hidden message from an image.</p>
+                                <a href="{% url 'stego_app:decode' %}" class="btn btn-success">Decode Message</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-4">
+                    <h5>How It Works:</h5>
+                    <p>
+                        The tool uses the Least Significant Bit (LSB) technique:
+                    </p>
+                    <ol>
+                        <li>Each character of your message is converted to its binary representation</li>
+                        <li>Each bit of the binary message replaces the least significant bit of a pixel's color value</li>
+                        <li>These small changes are imperceptible to the human eye but can be decoded by the tool</li>
+                    </ol>
+                    <p>
+                        For ethical use only. Always respect privacy and intellectual property rights.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

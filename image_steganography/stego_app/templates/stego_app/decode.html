@@ -1,0 +1,45 @@
+{% extends 'stego_app/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h2>Decode Hidden Message</h2>
+            </div>
+            <div class="card-body">
+                <p>Upload an image that contains a hidden message. The tool will extract and display the message.</p>
+                
+                {% if decoded_message %}
+                    <div class="alert alert-success">
+                        <h5>Decoded Message:</h5>
+                        <div class="p-3 border rounded bg-light">
+                            <pre style="white-space: pre-wrap; word-break: break-word;">{{ decoded_message }}</pre>
+                        </div>
+                    </div>
+                {% endif %}
+                
+                <form method="post" action="{% url 'stego_app:decode_image' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Select Image with Hidden Message</label>
+                        <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success">Extract Message</button>
+                    </div>
+                </form>
+                
+                <div class="mt-4">
+                    <h5>Notes:</h5>
+                    <ul>
+                        <li>Only images created with this tool can be decoded correctly</li>
+                        <li>If the image was modified after encoding (resized, recompressed, etc.), the message may be lost</li>
+                        <li>If no message is found, you'll be notified</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
